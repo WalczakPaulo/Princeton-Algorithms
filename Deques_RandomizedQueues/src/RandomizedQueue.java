@@ -23,7 +23,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public int size() {
         return numberOfItems;
     }                     // return the number of items on the queue
-
+    public int queueLength() { return itemsArray.length; }
     public Item getItem(int index) {
         return this.itemsArray[index];
     }
