@@ -22,6 +22,15 @@ class PointTest {
     }
 
     @org.junit.jupiter.api.Test
+    void compareTo() {
+        assertEquals(0,point1.compareTo(point2));
+        assertEquals(-1,point1.compareTo(point4));
+        assertEquals(-1,point1.compareTo(point3));
+        assertEquals(1,point5.compareTo(point1));
+        assertEquals(1,point4.compareTo(point1));
+    }
+
+    @org.junit.jupiter.api.Test
     void slopeTo() {
        assertEquals(0.25, point5.slopeTo(point1));
        assertEquals(0.0,point4.slopeTo(point1));
@@ -29,10 +38,6 @@ class PointTest {
        assertEquals(Double.NEGATIVE_INFINITY, point2.slopeTo(point1));
     }
 
-    @org.junit.jupiter.api.Test
-    void compareTo() {
-
-    }
 
     @org.junit.jupiter.api.Test
     void slopeOrder() {
