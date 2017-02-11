@@ -39,9 +39,4 @@ class PointTest {
     }
 
 
-    @org.junit.jupiter.api.Test
-    void slopeOrder() {
-
-    }
-
 }
