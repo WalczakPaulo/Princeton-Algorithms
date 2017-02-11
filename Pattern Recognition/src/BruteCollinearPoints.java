@@ -3,9 +3,9 @@ import java.util.Arrays;
  * Created by Paul on 2017-02-11.
  */
 public class BruteCollinearPoints {
-    Point[] points;
-    LineSegment[] lineSegments;
-    int numberOfSegments;
+    private Point[] points;
+    private LineSegment[] lineSegments;
+    private int numberOfSegments;
 
     public BruteCollinearPoints(Point[] points) {
         if(points == null)
