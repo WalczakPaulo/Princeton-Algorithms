@@ -1,3 +1,6 @@
+import sun.awt.image.ImageWatched;
+
+import java.util.LinkedList;
 /**
  * Created by Paul on 2017-02-13.
  */
@@ -41,7 +44,65 @@ public class Board {
                 }
         return countDistances;
     }            // return sum of Manhattan distances between blocks and goal
-    //public boolean equals(Object y);    // does this board position equal y
-    //public Iterable<Board> neighbors(); // return an Iterable of all neighboring board positions
-    //public String toString();           // return a string representation of the board
+    public boolean equals(Object y) {
+        if (y==this)
+            return true;
+        else if (y==null || !(y instanceof Board) || ((Board)y).board.length != board.length)
+            return false;
+        else
+            for (int row = 0; row < board.length; row++)
+                for (int col = 0; col < board.length; col++)
+                    if (((Board) y).board[row][col] != board[row][col]) return false;
+
+        return true;
+    }    // does this board position equal y
+
+    public int[][] swapTiles(int oldRow, int oldCol, int newRow, int newCol){
+        int[][] copyBoard = new int[this.board.length][this.board.length];
+        for(int i = 0; i < this.board.length; i++)
+            for(int j = 0; j < this.board.length; j++)
+                copyBoard[i][j] = this.board[i][j];
+        copyBoard[oldRow][oldCol] = this.board[newRow][newCol];
+        copyBoard[newRow][newCol] = this.board[oldRow][oldCol];
+        return copyBoard;
+    }
+
+    public int[] locateSpace() {
+        for (int row = 0; row < board.length; row++)
+            for (int col = 0; col < board.length; col++)
+                if (board[row][col] == 0) {
+                    int[] position = new int[2];
+                    position[0] = row;
+                    position[1] = col;
+                    return position;
+                }
+        throw new UnsupportedOperationException();
+    }
+
+    public Iterable<Board> neighbors(){
+        LinkedList <Board> neighbours = new LinkedList<Board>();
+        int[] spaceLocation = locateSpace();
+        int spaceRow = spaceLocation[0];
+        int spaceCol = spaceLocation[1];
+        if(spaceRow > 0 ) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow - 1, spaceCol)));
+        if(spaceRow < board.length) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow + 1, spaceCol)));
+        if(spaceCol > 0 ) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol - 1)));
+        if(spaceCol < board.length) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol + 1)));
+
+        return neighbours;
+    }  // return an Iterable of all neighboring board positions
+    public String toString() {
+        StringBuilder info = new StringBuilder();
+        info.append(board.length + "\n");
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++)
+                info.append(String.format("%2d ", board[row][col]));
+            info.append("\n");
+        }
+
+        return info.toString();
+    }           // return a string representation of the board
+
+
+
 }
