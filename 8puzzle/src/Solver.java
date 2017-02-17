@@ -1,7 +1,5 @@
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdIn;
-
-import java.util.Comparator;
 import java.util.Stack;
 
 /**
@@ -44,14 +42,9 @@ public class Solver {
         while(true){
             lastMove = nextMove(moves);
             if(lastMove != null) {
-//                System.out.println("All right, solution found");
-//                Stack <Board> solution = (Stack) solution();
-//                while(!solution.isEmpty())
-//                    System.out.println(solution.pop());
                 return;
             }
             else if (nextMove(twinMoves) != null) {
-//                System.out.println("Board not solvable");
                 return;
             }
 
