@@ -15,7 +15,10 @@ public class Board {
     }        // construct a board from an N-by-N array of tiles
 
     public int rightTile(int row, int col) {
-        return row*board.length + col + 1;
+        if(row == board.length - 1 && col == board.length - 1)
+            return 0;
+        else
+            return row*board.length + col + 1;
     }
 
     public int[] tilePosition(int value){
@@ -84,16 +87,19 @@ public class Board {
         int[] spaceLocation = locateSpace();
         int spaceRow = spaceLocation[0];
         int spaceCol = spaceLocation[1];
-        if(spaceRow > 0 ) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow - 1, spaceCol)));
-        if(spaceRow < board.length) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow + 1, spaceCol)));
-        if(spaceCol > 0 ) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol - 1)));
-        if(spaceCol < board.length) neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol + 1)));
+        if(spaceRow > 0 )
+            neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow - 1, spaceCol)));
+        if(spaceRow < board.length - 1)
+            neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow + 1, spaceCol)));
+        if(spaceCol > 0 )
+            neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol - 1)));
+        if(spaceCol < board.length - 1)
+            neighbours.add(new Board(swapTiles(spaceRow, spaceCol, spaceRow, spaceCol + 1)));
 
         return neighbours;
     }  // return an Iterable of all neighboring board positions
     public String toString() {
         StringBuilder info = new StringBuilder();
-        info.append(board.length + "\n");
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board.length; col++)
                 info.append(String.format("%2d ", board[row][col]));
@@ -103,6 +109,21 @@ public class Board {
         return info.toString();
     }           // return a string representation of the board
 
+    public Board makeTwin(){
+        for (int row = 0; row < board.length; row++)
+            for (int col = 0; col < board.length - 1; col++)
+                if(this.board[row][col] != 0 && this.board[row][col+1] != 0 )
+                    return new Board(swapTiles(row ,col ,row ,col + 1));
+        throw new UnsupportedOperationException();
 
+    }
+
+    public boolean isFinalBoard(){
+        for (int row = 0; row < board.length; row++)
+            for (int col = 0; col < board.length; col++)
+                if(this.board[row][col] != rightTile(row,col))
+                    return false;
+        return true;
+    }
 
 }
