@@ -91,25 +91,25 @@ public class Solver {
             throw new UnsupportedOperationException();
     }   // return an Iterable of board positions in solution
 
-    public static void main(String[] args) {
-        System.out.println("Enter grid length");
-        int N = StdIn.readInt();
-        int[][] tiles = new int[N][N];
-        System.out.println("Fill grid");
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                tiles[i][j] = StdIn.readInt();
-        System.out.println("Solving...");
-        Board initial = new Board(tiles);
-        Solver solver = new Solver(initial);
-        if (!solver.isSolvable()) {
-            System.out.println("No solution possible");
-        }
-        else {
-            Stack <Board> solution = (Stack) solver.solution();
-            while(!solution.isEmpty())
-                System.out.println(solution.pop());
-            System.out.println("Minimum number of moves = " + solver.moves());
-        }
-    }
+//    public static void main(String[] args) {
+//        System.out.println("Enter grid length");
+//        int N = StdIn.readInt();
+//        int[][] tiles = new int[N][N];
+//        System.out.println("Fill grid");
+//        for (int i = 0; i < N; i++)
+//            for (int j = 0; j < N; j++)
+//                tiles[i][j] = StdIn.readInt();
+//        System.out.println("Solving...");
+//        Board initial = new Board(tiles);
+//        Solver solver = new Solver(initial);
+//        if (!solver.isSolvable()) {
+//            System.out.println("No solution possible");
+//        }
+//        else {
+//            Stack <Board> solution = (Stack) solver.solution();
+//            while(!solution.isEmpty())
+//                System.out.println(solution.pop());
+//            System.out.println("Minimum number of moves = " + solver.moves());
+//        }
+//    }
 }
